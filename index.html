@@ -1,0 +1,697 @@
+<!DOCTYPE html><html lang="en" class="dark"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="preload" href="/assets/fonts/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" href="/assets/fonts/0c8f209abc35ee02-s.p.0c0g8ifvh7k7-.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" href="/assets/fonts/2a65768255d6b625-s.p.3u4lli0-axodc.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" href="/assets/fonts/5e5dfa9e86f764b8-s.p.22x-ws2e_cdqh.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" href="/assets/fonts/70e3db2de7f94926-s.p.39pl-v7c3qrze.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" href="/assets/fonts/797e433ab948586e-s.p.0r6juujl39pe6.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" href="/assets/fonts/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" href="/assets/fonts/8c2eb9ceedecfc8e-s.p.23aeddxv5enbo.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" href="/assets/fonts/fad69795a077455b-s.p.0t285orp4l5or.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" as="image" href="/globe-earth.svg"/><link rel="stylesheet" href="/assets/site.css"/><title>Decidian · Never hear it from your board first</title><meta name="description" content="The rehearsal before every board meeting. Decidian holds the CFO’s draft pack against every pack before it and shows the risk that changed, the line that is buried and what moved outside. Every finding sourced."/><link rel="canonical" href="https://decidian.io"/><meta property="og:title" content="Never hear it from your board first."/><meta property="og:description" content="The rehearsal before every board meeting. For the CFO who writes the board pack."/><meta property="og:url" content="https://decidian.io"/><meta property="og:site_name" content="Decidian"/><meta property="og:image" content="https://decidian.io/opengraph-image.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image:alt" content="Decidian · Never hear it from your board first."/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Never hear it from your board first."/><meta name="twitter:description" content="The rehearsal before every board meeting. For the CFO who writes the board pack."/><meta name="twitter:image" content="https://decidian.io/opengraph-image.png"/><meta name="twitter:image:alt" content="Decidian · Never hear it from your board first."/><meta name="twitter:image:type" content="image/png"/><meta name="twitter:image:width" content="1200"/><meta name="twitter:image:height" content="630"/><link rel="icon" href="/favicon.ico" sizes="256x256" type="image/x-icon"/><script type="module" src="/assets/forside.js"></script></head><body class="space_grotesk_2c742848-module__A4pgAG__variable geist_mono_8d43a2aa-module__8Li5zG__variable playfair_display_66067218-module__QsXOiG__variable dm_serif_display_e19fa6dc-module__d4y3Rq__variable lora_c0d49b2e-module__41o1zG__variable inter_7a7ef1f4-module__jjo8ZG__variable antialiased" style="font-family:var(--font-space-grotesk), sans-serif"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"Decidian","url":"https://decidian.io","logo":"https://decidian.io/decidian-logo.png","email":"contact@brightboard.io","address":{"@type":"PostalAddress","addressLocality":"Oslo","addressCountry":"NO"},"legalName":"BrightBoard AS","identifier":{"@type":"PropertyValue","propertyID":"NO-ORG","value":"935 969 034"},"description":"The rehearsal before every board meeting, for the CFO who writes the board pack. It runs on the company’s own machines and the AI the company already chose."},{"@type":"WebSite","name":"Decidian","url":"https://decidian.io"},{"@type":"SoftwareApplication","name":"Decidian","applicationCategory":"BusinessApplication","operatingSystem":"Web, Windows, macOS","url":"https://decidian.io","description":"Decidian reads your board pack against every pack before it. It finds the risk that changed, the line buried on page 83, and what moved outside since you wrote it."}]}</script><div class="min-h-screen relative flex flex-col" style="background:#f5f4f0"><main class="relative z-10 w-full flex-1 mx-auto px-4 sm:px-8 " style="max-width:900px"><div style="margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);width:100vw;text-align:left;overflow-x:clip"><style>
+.ld-ask:hover { background: #765a37 !important; border-color: #765a37 !important; }
+
+/* ── The board ledger: newspaper rows, gold hairline rules, no boxes ───────── */
+.ld-board-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 28px; /* ≥28px between the stripe (or the line) and the chevron */
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(184,151,106,0.38);
+  border-radius: 0;
+  padding: 38px 18px 38px 22px;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.ld-board-row:hover { background: #faf9f6; }
+/* The reading column NEVER collapses below ~280px on desktop: two clamped
+   lines at 16px ≈ 72 chars, minus the 12-char "Blind spot: " prefix ≈ 60
+   chars of the blind spot itself always visible. Below the side-by-side
+   breakpoint the stripe drops under the text and the line gets full width. */
+.ld-row-main { display: block; min-width: min(280px, 100%); flex: 1; }
+/* Movement: a short gold bar in the left margin — accent, never full height. */
+.ld-row-marker {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 34px;
+  background: #b8976a;
+}
+/* The textual affordance — "ASK YOUR ADVISOR →" in the ledger's small-caps
+   language. Plain text + arrow, never a box; secondary ink at rest, gold on
+   row hover (with the row's hover tone). The whole row is still the action. */
+.ld-chev {
+  flex-shrink: 0;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6f675e;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+.ld-board-row:hover .ld-chev { color: #8a6d42; }
+/* The data stripe: fixed column slots (MEETING + DOSSIER only — REV and
+   WATCHING were cut 2026-06-12), right-aligned tabular figures — the same
+   field sits at the same x-position on every row. */
+.ld-stripe { display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
+.ld-scell { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+.ld-s-meeting { width: 72px; }
+.ld-s-dossier { width: 68px; }
+.ld-slabel {
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a6d42;
+  white-space: nowrap;
+}
+.ld-svalue {
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: #18120c;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+/* "+ Analyze a new company" — a text link, not a box: gold +, small caps
+   secondary ink, hover → gold. */
+.ld-newco {
+  background: none;
+  border: none;
+  padding: 8px 4px;
+  cursor: pointer;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6f675e;
+  transition: color 0.15s ease;
+}
+.ld-newco:hover { color: #8a6d42; }
+@media (max-width: 860px) {
+  /* The stripe drops under the text as its own line; empty slots vanish so
+     the remaining figures wrap cleanly. Chevron stays visible, top right.
+     Breakpoint 860 (down from 1150 when the stripe held four slots):
+     side-by-side now needs only ~280px reading column + ~158px MEETING/
+     DOSSIER slots + the affordance — below 860 the row stacks so the
+     blind-spot line always gets the full width. */
+  .ld-board-row { flex-direction: column; align-items: stretch; gap: 14px; padding: 28px 14px 28px 16px; }
+  .ld-stripe { justify-content: flex-start; flex-wrap: wrap; gap: 8px 18px; }
+  .ld-scell { flex-direction: row; align-items: baseline; gap: 6px; width: auto !important; }
+  .ld-scell:empty { display: none; }
+  /* Always visible (touch has no hover), same top-right spot as before; the
+     title reserves its width so long company names ellipsize, not overlap. */
+  .ld-chev { position: absolute; top: 30px; right: 14px; }
+  .ld-row-title { padding-right: 148px; }
+}
+@media (max-width: 860px) {
+  .ld-cards { grid-template-columns: 1fr !important; }
+  .ld-cards .ld-cell { border-right: none !important; border-bottom: 1px solid rgba(24,18,12,0.1) !important; }
+  .ld-cards .ld-cell:last-child { border-bottom: none !important; }
+  .ld-spec { grid-template-columns: 1fr !important; }
+  .ld-price { grid-template-columns: 1fr !important; }
+  .ld-price .ld-pcell { border-right: none !important; border-bottom: 1px solid rgba(24,18,12,0.1) !important; }
+  .ld-price .ld-pcell:last-child { border-bottom: none !important; }
+}
+@media (max-width: 560px) {
+  .ld-wlrow { flex-direction: column !important; }
+  /* The hero's consequence clause steps aside on phones — the lead sentence
+     stands alone rather than the two-line clamp cutting the italic mid-
+     thought. The full line still lives on the board row. */
+  .ld-hero-em { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Public front page (logged-out) — ported verbatim from the approved
+   draft (forside-draft-system.html, v8, 2026-08-18). fp- prefix throughout
+   so nothing here can collide with the signed-in ledger's own ld- rules
+   above, or with any other class in the app.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Hero text column: 640px base, widens to 760px at 900px, 1120px at
+   1200px (see the media blocks below) — matches the draft's .hero-inner. ── */
+.fp-hero-text { max-width: 640px; margin: 0 auto; }
+.fp-hero-lead { max-width: 560px; }
+
+/* ── Hero globe: hairline outline/meridians/one moving orbit arc, centered
+   behind the hero text. Base structure is ink at low opacity (0.14-0.2);
+   the detection-cycle system below is the only bronze accent. ── */
+.fp-globe-wrap { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 320px; height: 320px; z-index: 0; pointer-events: none; }
+.fp-globe-wrap svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.fp-globe-wrap .fp-hairline { fill: none; stroke: #18120c; stroke-width: 1; }
+.fp-globe-wrap .fp-outline { stroke-opacity: 0.2; }
+.fp-globe-wrap .fp-meridian { stroke-opacity: 0.16; }
+.fp-globe-wrap .fp-orbit { stroke-opacity: 0.18; }
+.fp-globe-wrap .fp-orbit-dot { fill: #18120c; fill-opacity: 0.35; stroke: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .fp-globe-wrap .fp-orbit-dash { stroke-dasharray: 5 9; animation: fp-orbit-move 10s linear infinite; }
+  .fp-globe-wrap .fp-rotator { animation: fp-graticule-spin 60s linear infinite; transform-origin: 350px 350px; }
+}
+@keyframes fp-orbit-move { to { stroke-dashoffset: -140; } }
+@keyframes fp-graticule-spin { to { transform: rotate(360deg); } }
+
+/* ── Detection cycle: top-5 critical events take turns "detecting" near the
+   globe's flanks — dim node brightens, a ring expands/fades, a hairline
+   leader grows, a tracked-caps label fades in, then fades back to fully
+   idle (opacity 0, no permanent speck) before the next point's turn. Two
+   independent breakpoints, two independent point sets: detect-set-a
+   (fpDa1-fpDa4, 900-1199px) and detect-set-b (fpDb1-fpDb5, >=1200px). Every
+   delay is positive (nothing fires before its delay elapses at page load);
+   the right flank fires first in both sets (fpDa3 at 2.5s, fpDb1 at 2.5s),
+   matching the reduced-motion static default. ── */
+.fp-detect .fp-detect-node { fill: #765c3b; opacity: 0; }
+.fp-detect .fp-detect-ring { fill: none; stroke: #765c3b; stroke-width: 1; r: 0; opacity: 0; }
+.fp-detect .fp-detect-leader { stroke: #765c3b; stroke-width: 0.75; opacity: 0; }
+.fp-detect .fp-detect-label { font-family: var(--font-space-grotesk), system-ui, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; fill: #765c3b; opacity: 0; }
+.fp-detect.fp-detect-active .fp-detect-node { opacity: 1; }
+.fp-detect.fp-detect-active .fp-detect-ring { r: 9; opacity: 0.45; }
+.fp-detect.fp-detect-active .fp-detect-leader { opacity: 0.55; }
+.fp-detect.fp-detect-active .fp-detect-label { opacity: 1; }
+.fp-globe-wrap .fp-detect-set-a, .fp-globe-wrap .fp-detect-set-b { display: none; }
+@media (min-width: 900px) and (max-width: 1199px) {
+  .fp-globe-wrap .fp-detect-set-a { display: block; }
+}
+@media (min-width: 1200px) {
+  .fp-globe-wrap .fp-detect-set-b { display: block; }
+  .fp-detect-set-b .fp-detect-label { font-size: 6.5px; }
+}
+@media (min-width: 900px) and (max-width: 1199px) and (prefers-reduced-motion: no-preference) {
+  #fpDa1 .fp-detect-node, #fpDa2 .fp-detect-node, #fpDa3 .fp-detect-node, #fpDa4 .fp-detect-node { animation: fp-d-node-op 18s ease-in-out infinite; }
+  #fpDa1 .fp-detect-ring, #fpDa2 .fp-detect-ring, #fpDa3 .fp-detect-ring, #fpDa4 .fp-detect-ring { animation: fp-d-ring 18s ease-out infinite; }
+  #fpDa1 .fp-detect-leader, #fpDa2 .fp-detect-leader, #fpDa3 .fp-detect-leader, #fpDa4 .fp-detect-leader { animation: fp-d-leader-op 18s ease-in-out infinite; }
+  #fpDa1 .fp-detect-label, #fpDa2 .fp-detect-label, #fpDa3 .fp-detect-label, #fpDa4 .fp-detect-label { animation: fp-d-label-op 18s ease-in-out infinite; }
+  #fpDa3 .fp-detect-node, #fpDa3 .fp-detect-ring, #fpDa3 .fp-detect-leader, #fpDa3 .fp-detect-label { animation-delay: 2.5s; }
+  #fpDa1 .fp-detect-node, #fpDa1 .fp-detect-ring, #fpDa1 .fp-detect-leader, #fpDa1 .fp-detect-label { animation-delay: 7s; }
+  #fpDa4 .fp-detect-node, #fpDa4 .fp-detect-ring, #fpDa4 .fp-detect-leader, #fpDa4 .fp-detect-label { animation-delay: 11.5s; }
+  #fpDa2 .fp-detect-node, #fpDa2 .fp-detect-ring, #fpDa2 .fp-detect-leader, #fpDa2 .fp-detect-label { animation-delay: 16s; }
+}
+@media (min-width: 1200px) and (prefers-reduced-motion: no-preference) {
+  #fpDb1 .fp-detect-node, #fpDb2 .fp-detect-node, #fpDb3 .fp-detect-node, #fpDb4 .fp-detect-node, #fpDb5 .fp-detect-node { animation: fp-d-node-op 18s ease-in-out infinite; }
+  #fpDb1 .fp-detect-ring, #fpDb2 .fp-detect-ring, #fpDb3 .fp-detect-ring, #fpDb4 .fp-detect-ring, #fpDb5 .fp-detect-ring { animation: fp-d-ring 18s ease-out infinite; }
+  #fpDb1 .fp-detect-leader, #fpDb2 .fp-detect-leader, #fpDb3 .fp-detect-leader, #fpDb4 .fp-detect-leader, #fpDb5 .fp-detect-leader { animation: fp-d-leader-op 18s ease-in-out infinite; }
+  #fpDb1 .fp-detect-label, #fpDb2 .fp-detect-label, #fpDb3 .fp-detect-label, #fpDb4 .fp-detect-label, #fpDb5 .fp-detect-label { animation: fp-d-label-op 18s ease-in-out infinite; }
+  #fpDb1 .fp-detect-node, #fpDb1 .fp-detect-ring, #fpDb1 .fp-detect-leader, #fpDb1 .fp-detect-label { animation-delay: 2.5s; }
+  #fpDb4 .fp-detect-node, #fpDb4 .fp-detect-ring, #fpDb4 .fp-detect-leader, #fpDb4 .fp-detect-label { animation-delay: 6.1s; }
+  #fpDb2 .fp-detect-node, #fpDb2 .fp-detect-ring, #fpDb2 .fp-detect-leader, #fpDb2 .fp-detect-label { animation-delay: 9.7s; }
+  #fpDb5 .fp-detect-node, #fpDb5 .fp-detect-ring, #fpDb5 .fp-detect-leader, #fpDb5 .fp-detect-label { animation-delay: 13.3s; }
+  #fpDb3 .fp-detect-node, #fpDb3 .fp-detect-ring, #fpDb3 .fp-detect-leader, #fpDb3 .fp-detect-label { animation-delay: 16.9s; }
+}
+@keyframes fp-d-node-op { 0%,100% { opacity: 0; } 2% { opacity: 1; } 22% { opacity: 1; } 28% { opacity: 0; } }
+@keyframes fp-d-ring { 0%,100% { r: 0; opacity: 0; } 2% { r: 3; opacity: 0.6; } 8% { r: 12; opacity: 0; } 100% { r: 0; opacity: 0; } }
+@keyframes fp-d-leader-op { 0%,4%,100% { opacity: 0; } 6% { opacity: 0.55; } 24% { opacity: 0.55; } 28% { opacity: 0; } }
+@keyframes fp-d-label-op { 0%,5%,100% { opacity: 0; } 8% { opacity: 1; } 22% { opacity: 1; } 27% { opacity: 0; } }
+
+/* ── bronze stat accents + section 02 gut-punch pull-quote ── */
+.fp-stat { font-family: var(--font-playfair), Georgia, serif; font-style: normal; font-weight: 600; color: #765c3b; font-size: 1.12em; }
+.fp-punch { font-family: var(--font-playfair), Georgia, serif; font-size: clamp(24px,2.6vw,34px); line-height: 1.25; color: #18120c; text-align: center; margin: 18px auto 10px; max-width: 700px; }
+.fp-punch em { color: #765c3b; }
+.fp-stat-line { text-align: center; font-size: 16px; color: #514a40; margin: 14px 0 6px; }
+
+/* ── sources band: bronze label + a duplicated marquee tape of source
+   types, translateX(-50%) 55s linear infinite; reduced motion falls back
+   to static wrapped text with the duplicate hidden. ── */
+.fp-src-band { padding: 34px clamp(24px,6vw,60px); background: #fbfaf7; border-top: 1px solid rgba(24,18,12,0.10); border-bottom: 1px solid rgba(24,18,12,0.10); text-align: center; }
+.fp-src-band-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #765c3b; margin: 0 0 10px; }
+.fp-src-marquee { overflow: hidden; white-space: nowrap; }
+.fp-src-track { display: inline-flex; animation: fp-srcroll 55s linear infinite; }
+.fp-src-track span { font-size: 12.5px; letter-spacing: 0.04em; color: #6f675e; line-height: 1.8; flex-shrink: 0; }
+@keyframes fp-srcroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .fp-src-track { animation: none; white-space: normal; }
+  .fp-src-track span:last-child { display: none; }
+  .fp-src-marquee { white-space: normal; }
+}
+
+/* ── phone mock (section 03, "what lands in your pocket"): the page's one
+   lifted object. Titanium band = multi-stop gradient padding ring, separate
+   black bezel, iOS lock screen (date + big clock) + a real push-notification
+   card with app icon. No chat header, no logo, no brand marks. ── */
+.fp-pocket-layout { margin-top: 36px; }
+.fp-phone-mock { width: 300px; margin: 0 auto; }
+.fp-phone-frame { position: relative; aspect-ratio: 9/19.5; border-radius: 54px; padding: 3px; background: linear-gradient(155deg,#8f8a83 0%,#3c3833 16%,#6e6962 38%,#26221e 62%,#847e76 84%,#4a4540 100%); box-shadow: 0 34px 80px rgba(24,18,12,0.32), 0 10px 24px rgba(24,18,12,0.18); }
+.fp-phone-btn { position: absolute; width: 3px; border-radius: 2px; background: linear-gradient(90deg,#57524c,#8f8a83); }
+.fp-phone-btn.fp-action { left: -3px; top: 17%; height: 22px; }
+.fp-phone-btn.fp-vol-up { left: -3px; top: 24%; height: 42px; }
+.fp-phone-btn.fp-vol-dn { left: -3px; top: 31.5%; height: 42px; }
+.fp-phone-btn.fp-power { right: -3px; top: 27%; height: 62px; background: linear-gradient(270deg,#57524c,#8f8a83); }
+.fp-phone-bezel { background: #000; border-radius: 51px; padding: 8px; height: 100%; }
+.fp-phone-screen { position: relative; background: radial-gradient(140% 90% at 50% -10%,#3d3327 0%,#241d15 48%,#16110c 100%); border-radius: 43px; overflow: hidden; height: 100%; display: flex; flex-direction: column; padding: 0 10px; }
+.fp-phone-island { position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 92px; height: 27px; background: #000; border-radius: 15px; z-index: 3; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; }
+.fp-phone-island::after { content: ""; width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 35% 35%,#2c333b 0%,#0c0e11 55%,#000 100%); }
+.fp-phone-status { display: flex; justify-content: flex-end; align-items: center; padding: 17px 8px 0; flex-shrink: 0; }
+.fp-phone-sig { display: flex; align-items: flex-end; gap: 2px; height: 10px; }
+.fp-phone-sig i { width: 3px; background: #ede7da; border-radius: 1px; display: block; }
+.fp-phone-batt { width: 22px; height: 11px; border: 1px solid rgba(237,231,218,0.5); border-radius: 3.5px; margin-left: 7px; position: relative; padding: 1.5px; }
+.fp-phone-batt::before { content: ""; display: block; height: 100%; width: 72%; background: #ede7da; border-radius: 1.5px; }
+.fp-phone-batt::after { content: ""; position: absolute; right: -3.5px; top: 2.5px; width: 2px; height: 4px; background: rgba(237,231,218,0.5); border-radius: 0 1px 1px 0; }
+.fp-phone-date { text-align: center; font-size: 12.5px; font-weight: 500; color: #cfc6b6; margin-top: 24px; }
+.fp-phone-clock { text-align: center; font-size: 54px; font-weight: 600; letter-spacing: 0.01em; line-height: 1.05; color: #ede7da; }
+.fp-phone-notif { margin: 26px 4px 0; background: rgba(59,50,40,0.92); border-radius: 20px; padding: 13px 15px; box-shadow: 0 10px 26px rgba(0,0,0,0.35); }
+.fp-notif-top { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }
+.fp-notif-icon { width: 20px; height: 20px; border-radius: 5px; background: #f5f4f0; display: flex; align-items: center; justify-content: center; font-family: var(--font-playfair), Georgia, serif; font-size: 13.5px; line-height: 1; color: #18120c; letter-spacing: 0.02em; box-shadow: inset 0 0 0 1px rgba(24,18,12,0.12); }
+.fp-notif-app { font-size: 10.5px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #b8ad9c; flex: 1; }
+.fp-notif-time { font-size: 11px; color: #a89d8c; }
+.fp-phone-notif .fp-alert-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.fp-phone-notif .fp-alert-dot { width: 7px; height: 7px; border-radius: 50%; background: #d98878; flex-shrink: 0; }
+.fp-phone-notif .fp-alert-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #d98878; }
+.fp-phone-notif p.fp-body { font-family: var(--font-playfair), Georgia, serif; font-size: 16px; line-height: 1.45; color: #ede7da; margin: 0 0 11px; }
+.fp-phone-notif .fp-alert-tags { display: flex; gap: 7px; flex-wrap: wrap; }
+.fp-phone-notif .fp-alert-tags span { font-size: 10.5px; color: #a89d8c; border: 1px solid rgba(237,231,218,0.16); padding: 4px 9px; }
+/* 3-up cards (base: the layout below 1000px, before the phone sits beside
+   them). Kept as real CSS rules, not inline styles, so the >=1000px and
+   <=640px overrides below can actually take effect — an inline style on the
+   same element always wins over a class rule regardless of media query. */
+.fp-card-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border: 1px solid rgba(24,18,12,0.12); background: #fbfaf7; margin-top: 32px; }
+.fp-card-cell { padding: 24px 16px; border-right: 1px solid rgba(24,18,12,0.10); text-align: center; }
+.fp-card-cell:last-child { border-right: none; }
+/* wide: cards beside the phone, single-column stack, left-aligned, dividers instead of columns */
+@media (min-width: 1000px) {
+  .fp-pocket-layout { display: grid; grid-template-columns: 340px minmax(0,1fr); gap: 56px; align-items: center; margin-top: 44px; }
+  .fp-pocket-layout .fp-phone-mock { margin: 0; }
+  .fp-pocket-layout .fp-card-row { margin-top: 0; grid-template-columns: 1fr; }
+  .fp-pocket-layout .fp-card-cell { text-align: left; border-right: none; border-bottom: 1px solid rgba(24,18,12,0.10); padding: 24px 30px; }
+  .fp-pocket-layout .fp-card-cell:last-child { border-bottom: none; }
+}
+.fp-card-index { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: #765c3b; margin-bottom: 12px; }
+.fp-card-quote { font-family: var(--font-playfair), Georgia, serif; font-style: italic; }
+
+/* ── pricing feature lists ── */
+.fp-price-list { list-style: none; margin: 0 0 20px; padding: 0; }
+.fp-price-list li { display: flex; gap: 9px; align-items: flex-start; font-size: 14.5px; color: #514a40; line-height: 1.55; margin-bottom: 9px; }
+.fp-price-list li::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: #765c3b; flex-shrink: 0; margin-top: 8px; }
+
+/* ── Grids that stack on mobile (draft breakpoint: 640px, distinct from
+   the signed-in ledger's own 860px breakpoint above) ── */
+@media (max-width: 640px) {
+  .fp-fact-row { grid-template-columns: 1fr !important; }
+  .fp-card-row { grid-template-columns: 1fr !important; margin-top: 24px !important; }
+  .fp-card-cell { border-right: none !important; border-bottom: 1px solid rgba(24,18,12,0.10) !important; }
+  .fp-card-cell:last-child { border-bottom: none !important; }
+  .fp-price-row { grid-template-columns: 1fr !important; }
+  .fp-price-row .fp-price-cell { border-right: none !important; border-bottom: 1px solid rgba(24,18,12,0.10) !important; }
+  .fp-price-row .fp-price-cell:last-child { border-bottom: none !important; }
+  .fp-invite-row { flex-direction: column !important; }
+  /* Globe: same ring-effect as desktop, wider than the viewport so its side
+     arcs frame the stacked headline; events hidden below the 900px floor. */
+  .fp-globe-wrap { width: 440px; height: 440px; top: 50%; bottom: auto; left: 50%; transform: translate(-50%,-50%); opacity: 0.8; }
+  /* Phone stays a phone on mobile, just scaled down to fit the column. */
+  .fp-phone-mock { width: 260px; }
+  .fp-phone-island { width: 80px; height: 24px; top: 10px; border-radius: 13px; }
+  .fp-phone-clock { font-size: 46px; }
+  .fp-phone-date { margin-top: 20px; }
+  .fp-phone-notif { margin-top: 22px; }
+}
+
+/* ── Desktop: hero column widens, globe scales up, still centered ── */
+@media (min-width: 900px) {
+  .fp-hero-text { max-width: 760px; }
+  .fp-hero-lead { max-width: 600px; }
+  .fp-globe-wrap { width: 700px; height: 700px; }
+}
+/* ── Wide desktop: hero fills more of the viewport, headline scales up,
+   sphere shifted up relative to the text stack so it does not hang low
+   under the CTA (v40 dead-space fix). ── */
+@media (min-width: 1200px) {
+  .fp-hero { min-height: 92vh; display: flex; align-items: center; justify-content: center; }
+  .fp-hero-text { max-width: 1120px; width: 100%; }
+  .fp-hero-h1 { font-size: clamp(52px,5vw,92px); white-space: nowrap; }
+  .fp-hero-lead { max-width: 820px; font-size: 20px; }
+  .fp-globe-wrap { width: 122vh; height: 122vh; top: 50%; }
+}
+</style><div class="v45"><style>
+.v45{color-scheme:light;--ink:#18120C;--muted:#4F4A41;--paper:#F4F1EA;--paper-2:#FAF8F4;--dark:#100C08;--bronze:#765C3B;--bronze-deep:#5E4629;--gold:#D9B26A;--gold-text:#EFD6A6;--dark-text:#F0EADE;--dark-muted:#C4BDB1;--finding-challenged:#95513D;--finding-audit:var(--gold);--finding-silent:#496576;--hair:rgba(24,18,12,.18);--hair-dark:rgba(240,234,222,.2);--serif:var(--font-lora),Georgia,serif;--sans:var(--font-inter),Arial,sans-serif;--t-xl:95px;--t-display:40px;--t-small:30px;--t-stat:54px;--t-lead:23px;--t-body:17px;--t-label:13px;--t-caption:14px;--section:112px;--gutter:72px}
+.v45 *{box-sizing:border-box}
+.v45{scroll-behavior:smooth;scroll-padding-top:24px}
+.v45{margin:0;background:var(--paper);color:var(--ink);font:400 var(--t-body)/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+.v45 h1,.v45 h2,.v45 h3,.v45 p,.v45 figure{margin:0}
+.v45 h1,.v45 h2,.v45 h3{font-weight:400}
+.v45 a{color:inherit}
+.v45 button,.v45 input,.v45 select{font:inherit}
+.v45 button,.v45 a,.v45 input,.v45 select{-webkit-tap-highlight-color:transparent}
+.v45 a:focus-visible,.v45 button:focus-visible,.v45 input:focus-visible,.v45 select:focus-visible{outline:2px solid var(--bronze-deep);outline-offset:5px}
+.v45 .dark :focus-visible{outline-color:var(--gold-text)}
+.v45 ::selection{background:var(--gold);color:var(--dark)}
+.v45 .wrap{max-width:1440px;padding-inline:var(--gutter);margin-inline:auto}
+.v45 .label{font-size:var(--t-label);font-weight:600;letter-spacing:.16em;line-height:1.45;text-transform:uppercase;color:var(--muted)}
+.v45 .display{font:400 var(--t-display)/1.15 var(--serif);letter-spacing:-.025em;text-wrap:balance}
+.v45 .display-s{font:400 var(--t-small)/1.25 var(--serif);letter-spacing:-.015em}
+.v45 .lead{font-size:var(--t-lead);line-height:1.5}
+.v45 .caption{font-size:var(--t-caption);line-height:1.5;color:var(--muted)}
+.v45 .body{color:var(--muted)}
+.v45 .dark{color:var(--dark-text);background:var(--dark)}
+.v45 .dark .label,.v45 .dark .body,.v45 .dark .caption{color:var(--dark-muted)}
+.v45 .section{padding-block:var(--section)}
+.v45 .section-tag{display:flex;gap:20px;align-items:center;margin-bottom:40px}
+.v45 .section-tag:before{content:'';width:28px;height:1px;background:currentColor}
+.v45 .cta{display:inline-flex;align-items:center;justify-content:center;gap:30px;min-height:56px;padding:15px 25px;background:var(--bronze-deep);color:var(--paper-2);border:0;text-decoration:none;font:600 var(--t-label)/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+.v45 .cta:hover{background:var(--bronze)}
+.v45 .dark .cta{background:var(--gold);color:var(--dark)}
+.v45 .dark .cta:hover{background:var(--gold-text)}
+.v45 .arrow{display:inline-flex;align-items:center;font:400 23px/1 var(--sans);letter-spacing:0}
+.v45 .arrow svg{display:block;width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:square}
+.v45 .skip{position:absolute;top:8px;left:20px;transform:translateY(-150%);z-index:20;padding:10px 20px;background:var(--paper);color:var(--ink)}
+.v45 .skip:focus{transform:none}
+.v45 .text-link{display:inline-flex;align-items:center;min-height:44px;text-decoration:none}
+.v45 .text-link:hover{text-decoration:underline;text-underline-offset:6px}
+.v45{--night:#0A0A0C;--sky:#7FA7D9}
+.v45 .hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#111820 0,var(--night) 65%)}
+.v45 .nav{position:absolute;inset:0 0 auto;z-index:8;background:transparent;border-bottom:1px solid rgba(240,234,222,.14)}
+.v45 .nav-in{max-width:1200px;height:64px;margin:auto;padding-inline:var(--gutter);display:flex;align-items:center;justify-content:center}
+.v45 .wordmark{display:inline-flex;align-items:center;min-height:44px;font:400 var(--t-small)/1 var(--serif);letter-spacing:.42em;padding-left:.42em;text-transform:uppercase;text-decoration:none}
+.v45 .hero-panel{position:relative;min-height:900px;height:100svh;max-height:1100px;display:flex;align-items:center;justify-content:center;padding:190px 30px 160px;isolation:isolate}
+.v45 .globe-stage{position:absolute;inset:0;z-index:0;pointer-events:none}
+.v45 .globe-canvas,.v45 .globe-signals{position:absolute;inset:0;width:100%;height:100%}
+.v45 .globe-static{position:absolute;left:50%;top:50%;width:min(88vh,940px,96vw);aspect-ratio:1;transform:translate(-50%,-50%)}
+.v45 .globe-fallback{display:block;width:100%;height:100%;filter:drop-shadow(0 0 20px #7fa7d915)}
+.v45 .canvas-ready .globe-static{visibility:hidden}
+.v45 .hero-clearing{position:absolute;z-index:1;left:50%;top:50%;width:min(1060px,97%);height:520px;transform:translate(-50%,-46%);background:radial-gradient(ellipse,rgba(10,10,12,.99) 0%,rgba(10,10,12,.96) 48%,rgba(10,10,12,.70) 62%,transparent 76%);pointer-events:none}
+.v45 .hero-copy{position:relative;z-index:3;max-width:940px;text-align:center}
+.v45 .hero-copy>.label{color:var(--dark-muted)}
+.v45 .hero h1{font:400 var(--t-xl)/1.05 var(--serif);letter-spacing:-.045em;margin-top:24px;text-wrap:balance}
+.v45 .hero-lead{max-width:610px;margin:25px auto 0;color:var(--dark-muted);font-size:var(--t-body);line-height:1.65}
+.v45 .hero-actions{display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:27px}
+.v45 .hero-signin{font-size:var(--t-body);padding:0 15px;color:var(--dark-text)}
+.v45 .globe-meta{position:absolute;z-index:4;left:var(--gutter);right:var(--gutter);bottom:24px;display:flex;justify-content:space-between;align-items:center}
+.v45 .motion-toggle{background:transparent;color:var(--dark-muted);border:0;min-height:44px;cursor:pointer;font-size:var(--t-caption);padding:0 6px;text-underline-offset:5px}
+.v45 .motion-toggle:hover{text-decoration:underline}
+.v45 .motion-toggle[hidden]{display:none}
+@media(min-width:1100px){
+.v45 .hero{--t-xl:95px}}
+@media(max-width:1099px){
+.v45 .hero-panel{min-height:900px}
+}
+@media(max-width:767px){
+.v45 .hero{--t-xl:49px;--t-stat:39px;--t-small:25px;--t-label:12px;--t-body:16px}
+.v45 .hero-panel{height:auto;min-height:720px;max-height:none;align-items:center;padding:144px 20px 100px}
+.v45 .hero-copy{max-width:520px}
+.v45 .hero h1{margin-top:19px;line-height:1.08;letter-spacing:-.035em}
+.v45 .hero-lead{max-width:440px;margin-top:23px}
+.v45 .hero-actions{margin-top:25px;gap:6px}
+.v45 .hero-actions .cta{width:auto;min-height:44px;justify-content:center}
+.v45 .globe-static{height:min(calc(150vw * 900 / 784),calc(78% * 900 / 784));width:auto;top:50%;aspect-ratio:1}
+.v45 .hero-clearing{top:calc(50% - 40px);width:300%;height:500px;transform:translate(-50%,-50%)}
+.v45 .globe-meta{bottom:22px}
+}
+@media(max-height:520px) and (min-width:768px){
+.v45 .hero-panel{height:900px}}
+.v45{--section:104px;--night:#0A0A0C;--sky:#7FA7D9}
+.v45 .dark{background:var(--night)}
+.v45 .tonal{background:var(--paper-2)}
+.v45 .section-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-bottom:56px}
+.v45 .section-intro h2{max-width:620px}
+.v45 .section-intro>.body{max-width:560px;padding-top:4px}
+.v45 .section-tag{margin-bottom:32px}
+.v45 .section-line{max-width:770px;padding-top:32px;margin-top:44px;border-top:1px solid var(--hair)}
+.v45 .hero{background:radial-gradient(ellipse at 50% 38%,#111820 0,var(--night) 66%)}
+.v45 .hero-panel{min-height:1040px;max-height:1200px;padding:240px 30px 180px}
+.v45 .hero-copy{max-width:840px}
+.v45 .hero h1{max-width:840px;margin-inline:auto}
+.v45 .hero-lead{max-width:630px}
+.v45 .hero-clearing{width:min(1060px,98%);height:590px;transform:translate(-50%,-43%);background:radial-gradient(ellipse,rgba(10,10,12,.99) 0%,rgba(10,10,12,.96) 43%,rgba(10,10,12,.6) 60%,transparent 76%)}
+.v45 .globe-static{width:min(93vh,980px,92vw)}
+.v45 .fact{padding-top:28px;border-top:1px solid var(--hair)}
+.v45 .stat{font:400 var(--t-xl)/1 var(--serif);letter-spacing:-.045em;color:var(--ink);margin-bottom:24px}
+.v45 .fact .caption{margin-top:22px;max-width:31ch}
+.v45 .fact .body{max-width:34ch}
+.v45 .brief-items{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--hair)}
+.v45 .brief-items li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:20px;border-top:1px solid var(--hair);padding-block:27px}
+.v45 .severity{padding-top:5px;letter-spacing:.08em}
+.v45 .brief-items h3{font:400 var(--t-lead)/1.45 var(--serif)}
+.v45 .brief-source{display:flex;justify-content:space-between;gap:12px;margin-top:16px}
+.v45 .rehearsal{border-top:1px solid var(--hair)}
+.v45 .rehearsal .section-intro{margin-bottom:64px}
+.v45 .preview{background:var(--paper-2);border:1px solid var(--hair);box-shadow:0 24px 70px rgba(24,18,12,.10),0 4px 12px rgba(24,18,12,.035)}
+.v45 .preview-bar{display:flex;justify-content:space-between;align-items:center;gap:30px;padding:24px 36px;border-bottom:1px solid var(--hair)}
+.v45 .preview-brand{font:400 var(--t-small)/1.2 var(--serif)}
+.v45 .preview-bar .label{text-align:right}
+.v45 .preview-content{display:grid;grid-template-columns:1.08fr 1fr;gap:70px;padding:52px 42px;position:relative;isolation:isolate}
+.v45 .pack{border-right:0;padding-right:54px;position:relative;z-index:1}
+.v45 .pack h3{margin:34px 0 20px}
+.v45 .pack-line{font:400 var(--t-small)/1.6 var(--serif);margin-top:30px}
+.v45 .pack mark{background:#E4E7E8;color:var(--ink);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:3px 0}
+.v45 .pack-footer{display:flex;justify-content:space-between;gap:14px;margin-top:48px;padding-top:20px;border-top:1px solid var(--hair)}
+.v45 .margin-notes{position:relative;z-index:1}
+.v45 .margin-note{padding-left:22px;border-left:1px solid #737f8c}
+.v45 .margin-note+.margin-note{margin-top:32px;padding-top:0}
+.v45 .margin-note .label{margin-bottom:12px}
+.v45 .source-tag{display:block;margin-top:12px;text-decoration:underline;text-decoration-color:var(--hair);text-underline-offset:5px}
+.v45 .preview-caption{display:flex;justify-content:space-between;gap:24px;margin-top:24px}
+.v45 .signal-connection{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:0}
+.v45 .signal-connection path{stroke:#737f8c;stroke-width:1;fill:none}
+.v45 .signal-connection circle{fill:var(--gold)}
+.v45 .trust-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 48px}
+.v45 .trust-grid article{padding-top:22px;border-top:1px solid var(--hair)}
+.v45 .trust-grid h3{font:400 var(--t-lead)/1.4 var(--serif);margin-bottom:18px}
+.v45 .trust-grid .body{font-size:16px}
+.v45 .founder-grid{display:grid;grid-template-columns:270px 1fr;gap:100px;max-width:1160px;align-items:center}
+.v45 .founder .body{max-width:600px;margin-top:25px}
+.v45 .ask-grid{display:grid;grid-template-columns:1.1fr .85fr;gap:130px;align-items:start}
+.v45 .ask h2{font-size:var(--t-stat);margin-top:20px;max-width:570px}
+.v45 .ask-word>.body{max-width:500px;margin-top:30px}
+.v45 .ask .section-tag{margin-bottom:64px}
+.v45 .form-field{margin-bottom:24px}
+.v45 .form-field label{display:block;font-size:var(--t-caption);color:var(--dark-muted)}
+.v45 .form-field input,.v45 .form-field select{display:block;width:100%;min-width:0;min-height:52px;padding:10px 0;border:0;border-bottom:1px solid #77787a;border-radius:0;color:var(--dark-text);background:transparent;font-size:16px;color-scheme:dark}
+.v45 .form-field input::placeholder{color:var(--dark-muted);opacity:1}
+.v45 .form-field input:focus,.v45 .form-field select:focus{border-bottom-color:var(--gold)}
+.v45 .form .cta{width:100%;justify-content:space-between;margin-top:12px}
+.v45 .form-message{color:var(--gold-text);margin-top:18px}
+.v45 .form-message:empty{display:none}
+.v45 .foot{padding-block:32px;background:var(--night);border-top:1px solid var(--hair-dark)}
+.v45 .foot-top{display:flex;justify-content:space-between;gap:30px;align-items:center}
+.v45 .foot-links{display:flex;gap:28px}
+.v45 .foot .disclaimer{margin-top:12px}
+.v45 .foot .text-link{font-size:var(--t-caption)}
+@media(max-width:1279px){
+.v45{--gutter:44px;--section:88px}
+.v45 .section-intro{gap:48px}
+.v45 .preview-content{padding:40px 32px;gap:46px}
+.v45 .pack{padding-right:35px}
+.v45 .ask-grid{gap:70px}
+}
+@media(min-width:768px) and (max-width:1099px){
+.v45 .hero{--t-xl:64px}
+.v45 .hero-copy{max-width:650px}
+.v45 .hero-panel{min-height:1040px}
+.v45 .stat{font-size:64px}
+.v45 .preview-content{grid-template-columns:1fr;gap:36px}
+.v45 .pack{padding:0 0 30px;border-right:0;border-bottom:1px solid var(--hair)}
+.v45 .pack-line{max-width:600px}
+.v45 .margin-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.v45 .margin-note+.margin-note{margin-top:0}
+.v45 .margin-note{padding-left:15px}
+.v45 .trust-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px}
+.v45 .founder-grid{gap:48px;grid-template-columns:220px 1fr}
+.v45 .ask-grid{grid-template-columns:1fr 1fr;gap:45px}
+.v45 .ask h2{font-size:40px}
+.v45 .section-intro{grid-template-columns:1fr;gap:26px}
+.v45 .section-intro>.body{max-width:680px}}
+@media(max-width:767px){
+.v45{--t-xl:49px;--t-display:31px;--t-small:25px;--t-stat:39px;--t-lead:20px;--t-body:16px;--t-label:12px;--t-caption:14px;--gutter:20px;--section:64px}
+.v45 .section-tag{gap:14px;margin-bottom:28px}
+.v45 .section-intro{grid-template-columns:1fr;gap:24px;margin-bottom:36px}
+.v45 .section-line{margin-top:32px;padding-top:26px}
+.v45 .hero-panel{height:auto;min-height:720px;max-height:none;align-items:center;padding:144px 20px 100px}
+.v45 .hero-copy{max-width:520px}
+.v45 .hero-copy>.label{font-size:11px;letter-spacing:.08em;white-space:nowrap}
+.v45 .hero h1{font-size:clamp(40px,10.6vw,49px);line-height:1.08;letter-spacing:-.035em}
+.v45 .hero-headline-end{display:block}
+/* Inherit the desktop gradient stops. Its clear centre covers the phone text,
+   with the upper and lower globe exposed and gold signals above the clearing. */
+.v45 .hero-clearing{top:calc(50% - 40px);width:300%;height:500px;transform:translate(-50%,-50%)}
+.v45 .globe-stage{z-index:auto}
+.v45 .globe-signals{z-index:2}
+.v45 .globe-static{height:min(calc(150vw * 900 / 784),calc(78% * 900 / 784));width:auto;top:50%;aspect-ratio:1}
+.v45 .hero-actions .cta{padding-inline:18px}
+.v45 .fact{display:grid;grid-template-columns:100px minmax(0,1fr);gap:0 20px;padding-top:26px}
+.v45 .stat{font-size:49px;grid-row:1/3;margin:0}
+.v45 .fact .caption{grid-column:2;margin-top:16px}
+.v45 .brief-items li{grid-template-columns:1fr;gap:10px;padding-block:23px}
+.v45 .brief-source{flex-wrap:wrap;margin-top:12px}
+.v45 .brief-items h3{font-size:20px}
+.v45 .rehearsal .section-intro{margin-bottom:36px}
+.v45 .preview-bar{padding:18px;gap:20px}
+.v45 .preview-brand{font-size:25px}
+.v45 .preview-bar .label{max-width:150px;font-size:12px}
+.v45 .preview-content{grid-template-columns:1fr;padding:26px 20px;gap:30px}
+.v45 .pack{padding:0 0 28px;border-right:0;border-bottom:1px solid var(--hair)}
+.v45 .pack h3{margin-top:25px}
+.v45 .pack-line{font-size:25px;line-height:1.55;margin-top:24px}
+.v45 .pack-footer{flex-direction:column;gap:7px;margin-top:28px}
+.v45 .margin-note{padding-left:16px}
+.v45 .margin-note+.margin-note{margin-top:28px}
+.v45 .preview-caption{flex-direction:column;gap:8px;margin-top:20px}
+.v45 .trust-grid{grid-template-columns:1fr;gap:28px}
+.v45 .trust-grid h3{font-size:25px;margin-bottom:13px}
+.v45 .founder-grid{grid-template-columns:1fr;gap:32px}
+.v45 .founder .body{margin-top:22px}
+.v45 .ask-grid{grid-template-columns:1fr;gap:40px}
+.v45 .ask h2{font-size:39px}
+.v45 .ask .section-tag{margin-bottom:36px}
+.v45 .ask-word>.body{margin-top:24px}
+.v45 .foot-top{display:block}
+.v45 .foot-links{margin-top:14px}
+.v45 .foot .disclaimer{margin-top:14px}
+.v45 .cta{min-height:52px;padding-inline:20px;gap:18px}}
+@media(prefers-reduced-motion:reduce){
+.v45{scroll-behavior:auto}
+.v45 *,.v45 *:before,.v45 *:after{transition:none!important;animation:none!important}}
+.v45 .hero-copy>.label{width:fit-content;margin-inline:auto}
+.v45{--section:88px}
+.v45{scroll-behavior:auto}
+.v45 .text-link{min-width:44px}
+.v45 .section{opacity:1;visibility:visible;transform:none;content-visibility:visible}
+.v45 .section-intro{margin-bottom:44px}
+.v45 .pull-line{font:400 var(--t-stat)/1.25 var(--serif);letter-spacing:-.025em;text-wrap:balance}
+.v45 .fact .stat{font-size:var(--t-stat);white-space:nowrap}
+.v45 .fact .body{max-width:46ch}
+.v45 .fact .caption{max-width:48ch}
+.v45 .rehearsal{padding-block:100px}
+.v45 .founder{padding-block:68px}
+.v45 .founder-grid{grid-template-columns:240px minmax(0,1fr);gap:72px;max-width:1120px}
+.v45 .founder-portrait{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 35%}
+.v45 .founder-copy{border-top:1px solid var(--hair);padding-top:28px}
+.v45 .founder .body{max-width:570px}
+.v45 .ask .section-tag{margin-bottom:24px}
+.v45 .ask h2{margin-top:0}
+.v45 .form-assurance{margin-top:22px}
+.v45 .form-response{margin-top:12px}
+.v45 .form .cta:disabled{cursor:default;opacity:.7}
+@media(min-width:768px) and (max-width:1279px){
+.v45{--section:76px}
+}
+@media(min-width:768px) and (max-width:1099px){
+.v45 .founder-grid{grid-template-columns:200px minmax(0,1fr);gap:42px}
+.v45 .trust-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}}
+@media(max-width:767px){
+.v45{--section:60px}
+.v45 .pull-line{font-size:var(--t-display);line-height:1.3}
+.v45 .fact{grid-template-columns:1fr;gap:0}
+.v45 .fact .stat{grid-row:auto;font-size:49px;margin-bottom:18px}
+.v45 .fact .caption{grid-column:auto}
+.v45 .rehearsal{padding-block:64px}
+.v45 .founder{padding-block:52px}
+.v45 .founder-grid{grid-template-columns:1fr;gap:30px}
+.v45 .founder-portrait{width:min(100%,280px)}
+.v45 .founder-copy{padding-top:24px}
+.v45 .ask .section-tag{margin-bottom:22px}
+}
+@media print{
+.v45{scroll-behavior:auto}
+.v45 .section,.v45 .section *{opacity:1!important;visibility:visible!important;transform:none!important;content-visibility:visible!important;animation:none!important}
+.v45 .motion-toggle{display:none!important}
+.v45 .section{break-inside:auto}
+.v45 .founder-portrait,.v45 .margin-note,.v45 .fact{break-inside:avoid}
+.v45 .preview{box-shadow:none}
+}
+.v45 .gap .pull-line{max-width:1080px}
+.v45 .gap-context{display:grid;grid-template-columns:1fr;gap:40px;max-width:1080px;margin:40px auto 0}
+.v45 .gap-scenes{list-style:none;margin:0;padding:0;font-size:var(--t-body)}
+.v45 .gap-scenes li{padding-block:16px}
+.v45 .gap-scenes li:first-child{padding-top:0}
+.v45 .gap-scenes li:last-child{padding-bottom:0}
+.v45 .trust-grid{margin-top:54px}
+.v45 .motion-toggle:not(:focus-visible){position:absolute;width:1px;height:1px;min-height:0;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:767px){
+.v45 .gap-context{gap:30px;margin-top:32px}
+.v45 .trust-grid{margin-top:38px}}
+.v45 .invitation-code summary{width:fit-content;min-height:44px;padding-block:10px;font-size:var(--t-caption);color:var(--dark-muted);cursor:pointer;list-style:none;text-decoration:underline;text-underline-offset:6px}
+.v45 .invitation-code summary::-webkit-details-marker{display:none}
+.v45 .invitation-code summary:focus-visible{outline:2px solid var(--dark-muted);outline-offset:5px}
+.v45 .section-tag,.v45 .preview-bar .label,.v45 .pack>.label{color:var(--bronze)}
+.v45 .dark .section-tag{color:var(--gold-text)}
+.v45 .hero-actions{gap:12px}
+.v45 .hero-signin{justify-content:center;min-height:44px;padding:8px 24px;border:1px solid var(--hair-dark);text-decoration:none;transition:border-color .2s,background .2s}
+.v45 .hero-signin:hover{border-color:var(--gold);background:rgba(217,178,106,.04);text-decoration:none}
+.v45 .gap-context{max-width:none;gap:34px}
+.v45 .gap-scenes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+.v45 .gap-scenes li,.v45 .gap-scenes li:first-child,.v45 .gap-scenes li:last-child{position:relative;min-width:0;padding:0 0 0 20px;border:0;border-left:1px solid var(--hair)}
+.v45 .gap-scenes li:before{content:'';position:absolute;left:-4px;top:31px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.v45 .scene-anchor{display:block;font:400 clamp(42px,4.4vw,64px)/1.15 var(--serif);letter-spacing:-.045em;color:var(--ink);margin-bottom:22px}
+.v45 .gap-scenes li>span:last-child{display:block;max-width:31ch}
+.v45 .fact{display:grid;grid-template-columns:240px minmax(0,1fr) minmax(0,.7fr);align-items:center;gap:40px;padding-top:32px}
+.v45 .stat-signal{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.v45 .fact .stat{margin:0}
+.v45 .stat-dots{display:block;width:148px;height:38px;overflow:visible;fill:transparent;stroke:var(--bronze);stroke-width:1}
+.v45 .stat-dots .counted{fill:var(--gold);stroke:var(--bronze)}
+.v45 .fact .caption{margin:0;max-width:29ch}
+.v45 .preview-summary{padding:22px 36px;background:rgba(217,178,106,.09);border-bottom:1px solid var(--hair)}
+.v45 .preview-summary>p{font:400 23px/1.4 var(--serif);color:var(--ink)}
+.v45 .finding-key{display:flex;flex-wrap:wrap;gap:12px 26px;margin:14px 0 0;padding:0;list-style:none;font-size:13px;line-height:1.5;color:var(--muted)}
+.v45 .finding-key li{display:flex;align-items:center;gap:8px}
+.v45 .finding-challenged{--finding:var(--finding-challenged)}
+.v45 .finding-audit{--finding:var(--finding-audit)}
+.v45 .finding-silent{--finding:var(--finding-silent)}
+.v45 .finding-dot{display:inline-block;flex:0 0 auto;width:7px;height:7px;border-radius:50%;background:var(--finding);box-shadow:0 0 0 3px var(--paper-2)}
+.v45 .preview-content{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+.v45 .pack,.v45 .margin-notes{min-width:0}
+.v45 .pack mark{background:rgba(217,178,106,.22)}
+.v45 .margin-note{border-left:2px solid var(--finding);padding:2px 0 2px 20px}
+.v45 .margin-note .label{display:flex;align-items:baseline;gap:10px;color:var(--bronze);letter-spacing:.1em}
+.v45 .margin-note .finding-dot{align-self:center}
+.v45 .source-tag{display:inline-block;max-width:100%;padding:6px 10px;border:1px solid var(--hair);border-radius:4px;background:var(--paper);font-size:12px;line-height:1.55;text-decoration:none;overflow-wrap:anywhere}
+.v45 .signal-connection{display:block;z-index:0}
+.v45 .signal-connection path{stroke:var(--gold);stroke-width:1;vector-effect:non-scaling-stroke}
+.v45 .signal-connection .connection-halo{fill:none;stroke:var(--gold);stroke-width:1}
+.v45 .signal-connection .connection-dot{fill:var(--gold)}
+.v45 .foot-top{gap:24px}
+.v45 .foot-top>.caption{font-size:12px}
+.v45 .foot-links{flex:0 0 auto;gap:20px}
+.v45 .foot-links .text-link{font-size:12px}
+@media(min-width:768px) and (max-width:1099px){
+.v45 .gap-scenes{gap:24px}
+.v45 .fact{grid-template-columns:190px minmax(0,1fr);gap:20px 32px}
+.v45 .stat-signal{grid-row:1/3}
+.v45 .fact .caption{grid-column:2;max-width:none}
+.v45 .brief-items li{grid-template-columns:1fr;gap:8px;padding-block:20px}
+.v45 .brief-items h3{font-size:20px}
+.v45 .brief-source{flex-wrap:wrap}
+.v45 .preview-content{grid-template-columns:1fr;gap:40px}
+.v45 .pack{padding-left:22px}
+.v45 .margin-notes{display:block;padding-left:22px}
+.v45 .margin-note+.margin-note{margin-top:28px}
+.v45 .foot-top{flex-wrap:wrap;gap:8px 20px}
+}
+@media(max-width:767px){
+.v45 .hero-actions{gap:12px}
+.v45 .hero-actions .hero-signin{width:auto;min-height:44px}
+.v45 .gap-context{gap:30px}
+.v45 .gap-scenes{grid-template-columns:1fr;gap:0}
+.v45 .gap-scenes li,.v45 .gap-scenes li:first-child,.v45 .gap-scenes li:last-child{display:grid;grid-template-columns:105px minmax(0,1fr);gap:18px;padding:24px 0 24px 16px}
+.v45 .gap-scenes li:before{top:42px}
+.v45 .scene-anchor{font-size:39px;margin:0;white-space:nowrap;align-self:start}
+.v45 .gap-scenes li>span:last-child{font-size:15px;line-height:1.6}
+.v45 .fact{grid-template-columns:1fr;gap:20px;padding-top:26px}
+.v45 .stat-signal{flex-direction:row;align-items:center;justify-content:space-between;gap:16px}
+.v45 .fact .stat{font-size:46px;margin:0}
+.v45 .stat-dots{width:126px;height:auto;flex:0 0 auto}
+.v45 .fact .caption{margin:0;max-width:none}
+.v45 .preview-bar{flex-direction:column;align-items:flex-start;gap:14px}
+.v45 .preview-bar .label{font-size:10px;max-width:none;text-align:left;letter-spacing:.12em}
+.v45 .preview-summary{padding:20px}
+.v45 .preview-summary>p{font-size:21px}
+.v45 .finding-key{display:grid;gap:10px;font-size:12px;margin-top:18px}
+.v45 .preview-content{grid-template-columns:1fr;padding:28px 20px;gap:32px}
+.v45 .pack{padding-left:20px}
+.v45 .pack-line{font-size:23px}
+.v45 .margin-notes{padding-left:20px}
+.v45 .margin-note{padding-left:15px}
+.v45 .margin-note .label{font-size:11px;letter-spacing:.08em;gap:8px}
+.v45 .source-tag{font-size:12px;padding:6px 8px}
+.v45 .foot-top{display:flex;flex-wrap:wrap;gap:10px}
+.v45 .foot-top>.caption{font-size:12px;line-height:1.8;max-width:43ch}
+.v45 .foot-links{margin-top:0}
+.v45 .foot-links .text-link{font-size:14px}
+}
+.v45 .form-message a{color:var(--gold-text)}
+.v45 .form-err{color:#F0A99A}
+.v45 .outside-brief{min-width:0}
+.v45 .outside-brief>figcaption{padding-bottom:28px}
+.v45 .outside-brief .severity{display:flex;align-items:baseline;gap:8px}
+.v45 .outside-brief .severity:before{content:'';width:7px;height:7px;flex:0 0 auto;border-radius:50%;background:var(--gold)}
+.v45 .portfolio-packs{display:block;width:440px;max-width:100%;height:auto;margin:0 auto}
+.v45 .portfolio-sheets{stroke:var(--hair-dark);stroke-width:1}
+.v45 .portfolio-link{stroke:var(--gold);stroke-width:1}
+.v45 .portfolio-signals{fill:var(--gold)}
+.v45 .portfolio-packs path{vector-effect:non-scaling-stroke}
+</style><a class="skip" href="#main">Skip to content</a><div class="dark hero" id="top"><nav class="nav" aria-label="Main navigation"><div class="nav-in"><a href="#top" class="wordmark" aria-label="Decidian home">DECIDIAN</a></div></nav><header class="hero-panel"><div class="globe-stage" aria-hidden="true"><div class="globe-static"><img src="/globe-earth.svg" alt="" aria-hidden="true" class="globe-fallback"/></div><canvas class="globe-canvas"></canvas><svg class="globe-signals" aria-hidden="true"></svg></div><div class="hero-clearing" aria-hidden="true"></div><div class="hero-copy"><p class="label">For the CFO who writes the board pack</p><h1>Never hear it from <span class="hero-headline-end">your board first.</span></h1><p class="hero-lead">Decidian reads your board pack against every pack before it. It finds the risk that changed, the line buried on page 83, and what moved outside since you wrote it.</p><div class="hero-actions"><a href="mailto:contact@brightboard.io" class="cta">Contact us <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><path d="M3.5 12.5 12.5 3.5M5.5 3.5h7v7"></path></svg></span></a></div></div><div class="globe-meta"><button type="button" class="motion-toggle" id="motion-toggle" aria-pressed="false" hidden>Pause motion</button></div></header></div><main id="main"><section class="section tonal gap" id="the-gap" aria-labelledby="the-gap-title"><div class="wrap"><p class="label section-tag">The gap</p><h2 class="pull-line" id="the-gap-title">An ambush is not a hard question. It is a question your own pack should have answered.</h2><div class="gap-context"><ul class="gap-scenes body" role="list"><li><span class="scene-anchor">23:00</span><span>Eleven the night before, you are still playing devil’s advocate against your own pack.</span></li><li><span class="scene-anchor">p. 83</span><span>The thing that mattered was in the pack: one sentence, on page 83.</span></li><li><span class="scene-anchor">45 min</span><span>You present for 45 minutes. “Great, well delivered. Next item.”</span></li></ul><article class="fact"><div class="stat-signal"><p class="stat">9 of 14</p><svg class="stat-dots" viewBox="0 0 148 38" aria-hidden="true"><circle cx="8" cy="8" r="4" class="counted"></circle><circle cx="30" cy="8" r="4" class="counted"></circle><circle cx="52" cy="8" r="4" class="counted"></circle><circle cx="74" cy="8" r="4" class="counted"></circle><circle cx="96" cy="8" r="4" class="counted"></circle><circle cx="118" cy="8" r="4" class="counted"></circle><circle cx="140" cy="8" r="4" class="counted"></circle><circle cx="8" cy="30" r="4" class="counted"></circle><circle cx="30" cy="30" r="4" class="counted"></circle><circle cx="52" cy="30" r="4"></circle><circle cx="74" cy="30" r="4"></circle><circle cx="96" cy="30" r="4"></circle><circle cx="118" cy="30" r="4"></circle><circle cx="140" cy="30" r="4"></circle></svg></div><p class="body">private-equity-backed CFOs were caught out in the past year by a board question their own pack should have answered.</p><p class="caption">Core3 roundtable of 14 PE-backed CFOs, UK, May 2026</p></article></div></div></section><section class="section rehearsal tonal" id="rehearsal" aria-labelledby="rehearsal-title"><div class="wrap"><p class="label section-tag">Since the last pack</p><div class="section-intro"><h2 class="display" id="rehearsal-title">The risk is in what changed.</h2><p class="body">Upload your draft. Decidian holds it against every pack before it and brings the three risks that matter to the top: what moved, what is buried, and what the pack does not say you are doing about it.</p></div><figure aria-labelledby="rehearsal-title"><div class="preview"><div class="preview-bar"><span class="preview-brand">Decidian</span><span class="label">Pack review<br/>Runs on your machine</span></div><div class="preview-summary"><p>Before Thursday · 3 to prepare</p><ul class="finding-key" role="list"><li class="finding-challenged"><span class="finding-dot" aria-hidden="true"></span>Changed since last pack</li><li class="finding-audit"><span class="finding-dot" aria-hidden="true"></span>No plan in the pack</li><li class="finding-silent"><span class="finding-dot" aria-hidden="true"></span>Changed outside</li></ul></div><div class="preview-content"><svg class="signal-connection" aria-hidden="true"><path></path><circle class="connection-halo" r="9"></circle><circle class="connection-dot" r="3"></circle></svg><div class="pack"><p class="label">Board pack · Section 7</p><h3 class="display-s">Customers &amp; revenue</h3><p class="pack-line"><mark>“Our largest customer’s share of revenue increased slightly this quarter.”</mark></p><div class="pack-footer caption"><span>Extract · Page 83</span></div></div><div class="margin-notes"><div class="margin-note finding-challenged"><p class="label"><span class="finding-dot" aria-hidden="true"></span>01 · Changed since last pack</p><p>Customer concentration rose from 31% to 38% of revenue since Q2. The pack mentions it once, on page 83.</p><span class="source-tag caption">Source: Q2 and Q3 packs</span></div><div class="margin-note finding-audit"><p class="label"><span class="finding-dot" aria-hidden="true"></span>02 · No plan in the pack</p><p>Covenant headroom fell to 1.2x. The pack names the risk but not what you are doing about it.</p><span class="source-tag caption">Prepare: mitigation + downside case</span></div><div class="margin-note finding-silent"><p class="label"><span class="finding-dot" aria-hidden="true"></span>03 · Changed outside</p><p>Two of five peers cut guidance since this was written. Does the demand assumption on page 12 still hold?</p><span class="source-tag caption">Sources: 2 exchange filings</span></div></div></div></div></figure><div class="trust-grid"><article><h3>Runs on your machine</h3><p class="body">Your packs and their history stay with you.</p></article><article><h3>On the AI you already chose</h3><p class="body">Claude, Copilot or ChatGPT, under your company’s own agreement. Nothing comes to us.</p></article><article><h3>Every finding sourced</h3><p class="body">Each finding points to its page or source, with a date.</p></article></div></div></section><section class="section" id="outside-view" aria-labelledby="outside-view-title"><div class="wrap"><p class="label section-tag">The outside view</p><div class="section-intro"><h2 class="display" id="outside-view-title">Then hold your pack up against the world.</h2><p class="body">Decidian reads the public world around your company: peers, customers, suppliers and lenders. Anything that moved since you wrote the pack is tied to the page it touches, with its source and date.</p></div><figure class="outside-brief"><figcaption class="display-s">Since your last pack</figcaption><ol class="brief-items"><li><span class="label severity">High</span><div><h3>Your closest peer lowers full-year guidance</h3><p class="caption brief-source"><span>Exchange filing</span><span>touches page 12</span></p></div></li><li><span class="label severity">Medium</span><div><h3>Credit insurer tightens limits in your second-largest market</h3><p class="caption brief-source"><span>Sector press</span><span>touches page 31</span></p></div></li><li><span class="label severity">Low</span><div><h3>Key supplier files accounts with negative equity</h3><p class="caption brief-source"><span>Company registry</span><span>touches page 54</span></p></div></li></ol></figure><p class="body section-line">Exchange filings, company registries, regulators and the press. Public sources only.</p></div></section><section class="section tonal meeting" id="the-meeting" aria-labelledby="meeting-title"><div class="wrap"><p class="label section-tag">The meeting</p><div class="section-intro"><h2 class="display" id="meeting-title">Spend the meeting on what comes next.</h2><p class="body">When the three risks that matter open the pack, the room stops explaining last quarter and starts on the next one.</p></div><article class="fact"><div class="stat-signal"><p class="stat">62%</p></div><p class="body">of board members and governance professionals say board information is too operational and not strategic enough.</p><p class="caption">Board Intelligence, 2023</p></article></div></section><section class="section dark investors" id="for-investors" aria-labelledby="investors-title"><div class="wrap"><p class="label section-tag">For investors</p><div class="section-intro"><h2 class="display" id="investors-title">Your CFOs find the risk before you have to.</h2><p class="body">One standard for every board pack in your portfolio. Each company runs Decidian on its own machines and its own AI. You get sharper packs and better meetings, not their data.</p></div><svg class="portfolio-packs" viewBox="0 0 350 126" fill="none" aria-hidden="true" focusable="false"><g class="portfolio-sheets"><path d="M20 12h60v76H20z M145 12h60v76h-60z M270 12h60v76h-60z"></path><path d="M34 32h32 M34 46h32 M34 60h20 M159 32h32 M159 46h32 M159 60h20 M284 32h32 M284 46h32 M284 60h20"></path></g><path class="portfolio-link" d="M50 88v24h250V88 M175 88v24"></path><g class="portfolio-signals"><circle cx="50" cy="112" r="3"></circle><circle cx="175" cy="112" r="3"></circle><circle cx="300" cy="112" r="3"></circle></g></svg></div></section><section class="section founder tonal" id="founder" aria-labelledby="founder-title"><div class="wrap founder-grid"><div class="founder-copy"><h2 class="display" id="founder-title">Built for the person who writes the pack.</h2><p class="caption" style="margin-top:18px">Founder and CEO. Building Decidian at Startuplab in Oslo.</p></div></div></section><section class="section dark ask" id="invitation" aria-labelledby="ask-title"><div class="wrap ask-grid"><div class="ask-word"><p class="label section-tag">By invitation</p><h2 class="display" id="ask-title">Rehearse your last board meeting first.</h2><p class="body">We are shaping Decidian with a small group of CFOs and investors.</p></div><div class="form" id="access-form"><a href="mailto:contact@brightboard.io" class="cta">Contact us <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><path d="M3.5 12.5 12.5 3.5M5.5 3.5h7v7"></path></svg></span></a><p class="caption form-assurance">We never ask for your pack. It stays under your control.</p><p class="caption form-response">We reply to every request within one working day.</p></div></div></section></main><footer class="dark foot"><div class="wrap"><div class="foot-top"><p class="caption">Decidian by BrightBoard AS · Org. no. 935 969 034 · Decision support, not financial or legal advice.</p><div class="foot-links"><a href="/privacy" class="text-link">Privacy</a><a href="/terms" class="text-link">Terms</a></div></div></div></footer></div></div></main></div></body></html>
